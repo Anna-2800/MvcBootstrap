@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http:thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http:thymeleaf.org ">
+      xsi:schemaLocation="http:thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -47,39 +47,39 @@
 
 
         <div class="bg-white ml-3 pr-4 text-center font-weight-bold border">
-
             <div class="mx-auto pt-3" style="width: 25em;">
 
             <form th:method="POST" th:action="@{/admin/users/createNew}" th:object="${user}">
 
                 <div class="form-group">
-                    <label for="username/">First name</label>
-                    <input type="text" th:field="*{username}" id="username/" class="form-control" >
+                    <label for="username">First name</label>
+                    <input type="text" class="form-control" id="username" name="username"  >
                 </div>
                 <div class="form-group">
-                    <label for="lastname/">Last name</label>
-                    <input type="text" th:field="*{lastname}" id="lastname/" class="form-control" >
+                    <label for="lastname">Last name</label>
+                    <input type="text" id="lastname" class="form-control" name="lastname" >
                 </div>
                 <div class="form-group">
-                    <label for="age/">Age</label>
-                    <input type="text" th:field="*{age}" id="age/" class="form-control" >
+                    <label for="age">Age</label>
+                    <input type="text"  id="age" class="form-control" name="age" >
                 </div>
                 <div class="form-group">
-                    <label for="email/">Email</label>
-                    <input type="text" th:field="*{email}" id="email/" class="form-control" >
+                    <label for="email">Email</label>
+                    <input type="text" id="email" class="form-control" name="email" >
                 </div>
                 <div class="form-group">
-                    <label for="password/">Password</label>
-                    <input type="text" th:field="*{age}" id="password/" class="form-control" >
+                    <label for="password">Password</label>
+                    <input type="text" id="password" class="form-control" name="password">
                 </div>
+
                 <div class="form-group">
-                    <label for="role/">Role</label>
-                    <select  multiple class="form-control" name="AllRoles" th:each="role : ${allRoles}" id="role/" >
-                        <option th:value="${role.role}">ADMIN</option>
-                        <option th:value="${role.role}">USER</option>
+                    <label for="role">Role</label>
+                    <select  class="form-control mb-3" name="allRoles" id="role" size="2">
+                        <option value="ROLE_USER">USER</option>
+                        <option value="ROLE_ADMIN">ADMIN</option>
                     </select>
                 </div>
-                <button input type="submit" class="btn btn-success">Add new user</button>
+                <input type="submit" class="btn btn-success btn-lg submit p-2 pl-4 pr-4" value="Add new user" name="submit"><br>
             </form>
             </div>
         </div>
@@ -91,6 +91,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+</html>
 <!--<body>-->
 <!--<h1>Add user</h1>-->
 

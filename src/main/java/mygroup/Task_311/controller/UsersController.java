@@ -52,9 +52,12 @@ public class UsersController {
     }
 
     @GetMapping("/admin/users/new")
-    public String newUser(Model model){
+    public String newUser(Model model, @AuthenticationPrincipal UserDetails currentUser){
         model.addAttribute("user", new User());
         model.addAttribute("allRoles", roleService.listRoles());
+        User user = userService.findUserByUsername(currentUser.getUsername());
+        model.addAttribute("user", user);
+        model.addAttribute("userRoles", roleService.getById(user.getId()));
         return "admin/new";
     }
 
@@ -71,7 +74,6 @@ public class UsersController {
 
     @GetMapping("/admin/users/{id}/edit")
     public String editPage(Model model, @PathVariable("id") long id){
-        //User user = userService.getById(id);
         model.addAttribute("allRoles", roleService.listRoles());
         model.addAttribute("user", userService.getById(id));
         return "admin/edit";
@@ -88,22 +90,12 @@ public class UsersController {
         return "redirect:/admin/users";
     }
 
-    @RequestMapping(value="admin/users/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value="/admin/users/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("id") long id) {
         userService.delete(userService.getById(id));
         return "redirect:/admin/users";
     }
 
-
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String printWelcome(ModelMap model) {
-        List<String> messages = new ArrayList<>();
-        messages.add("Hello!");
-        messages.add("I'm Spring MVC-SECURITY application");
-        messages.add("5.2.0 version by sep'19 ");
-        model.addAttribute("messages", messages);
-        return "hello";
-    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
@@ -113,9 +105,9 @@ public class UsersController {
 
     @RequestMapping("/user")
     public String dashboardPageList(Model model, @AuthenticationPrincipal UserDetails currentUser ) {
-        User user = (User) userService.findUserByUsername(currentUser.getUsername());
+        User user = userService.findUserByUsername(currentUser.getUsername());
         model.addAttribute("user", user);
-
+        model.addAttribute("userRoles", roleService.getById(user.getId()));
         return "user";
     }
 }
